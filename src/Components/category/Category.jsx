@@ -2,6 +2,7 @@ import Cards from '../cards/Cards';
 import './category.sass';
 
 const Category = (props) => {
+
     return (
         <div className='category'>
             <div className="category__name">{props.category}</div>

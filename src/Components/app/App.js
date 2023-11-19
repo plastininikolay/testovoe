@@ -1,26 +1,29 @@
 import Header from "../header/Header";
 import { useEffect } from "react";
-import { fetchCards } from "../cards/cardsSlise";
+import { fetchCategories,fetchCards } from "../cards/cardsSlise";
 import { useDispatch } from "react-redux";
 import ErrorBoundary from '../errorBoundary/ErrorBoundary'
 import Category from "../category/Category";
+import { useSelector } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
+  const categories = useSelector(state => state.cards.categories)
+  
   useEffect(()=>{
-    dispatch(fetchCards());
+    dispatch(fetchCategories());
+    dispatch(fetchCards())
     // eslint-disable-next-line
   },[])
+
+  const items = categories.map(category => <Category key={category} category={category}/>)
 
   return (
     <>
       <Header/>
         <div className="wrapper">
           <ErrorBoundary>
-            <Category category={"men's clothing"}/>
-            <Category category={"jewelery"}/>
-            <Category category={"electronics"}/>
-            <Category category={"women's clothing"}/>
+            {items}
           </ErrorBoundary>
         </div>
     </>

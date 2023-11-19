@@ -8,12 +8,14 @@ import './cards.sass';
 
 const Card = (props) => {
     const cards = selectAll(store.getState());
+    const filtredCards = cards.filter(card => card.category === props.category);
     const cardsLoadingStatus = useSelector(state => state.cards.cardsLoadingStatus);
     const dispatch = useDispatch();
-    
+
+
     const renderItems = (arr) =>{
         // eslint-disable-next-line
-        const items = arr.map(item => {if(props.category !== item.category) return;
+        const items = arr.map(item => {
             return (
                 <div key={item.id} className="card">
                     <img src={item.image} alt=''/>
@@ -35,7 +37,7 @@ const Card = (props) => {
             </ul>
         )
     }
-    const items = renderItems(cards);
+    const items = renderItems(filtredCards);
 
     const errorMessage = cardsLoadingStatus === 'error' ? <ErrorMessage/> : null;
     const spinner = cardsLoadingStatus === 'loading' ? <Spinner/> : null;

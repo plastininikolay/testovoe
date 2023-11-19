@@ -8,11 +8,11 @@ const Cart = () => {
     const {price, counter} = useSelector(state => state.cart)
     return (
         <div className='cart'>
-            <div className="price">{price}$</div>
+            <div className="price">{Math.round(price)}$</div>
             <div className="divider"></div>
             <div className="count">
                 <img src={cartImg} alt="cart"/>
-                {Math.floor(counter)}
+                {counter}
             </div>
         </div>
     );
